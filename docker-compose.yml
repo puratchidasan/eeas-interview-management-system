@@ -1,0 +1,77 @@
+version: '3.9'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# European Commission — Interview Management System
+# Docker Compose — Local Development Stack
+#
+# Services:
+#   - ims-app        : Spring Boot application (prod profile → PostgreSQL)
+#   - ims-db         : PostgreSQL 16 database
+#   - ims-adminer    : Lightweight DB admin UI (http://localhost:8081)
+#
+# Usage:
+#   docker compose up -d          # Start all services
+#   docker compose logs -f ims-app # Follow app logs
+#   docker compose down -v         # Stop and remove volumes
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  ims-db:
+    image: postgres:16-alpine
+    container_name: ims-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: imsdb
+      POSTGRES_USER: ims_user
+      POSTGRES_PASSWORD: ims_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - ims_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ims_user -d imsdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ims-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ims-app
+    restart: unless-stopped
+    depends_on:
+      ims-db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: ims-db
+      DB_PORT: 5432
+      DB_NAME: imsdb
+      DB_USER: ims_user
+      DB_PASS: ims_pass
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q '\"status\":\"UP\"'"]
+      interval: 15s
+      timeout: 5s
+      start_period: 45s
+      retries: 5
+
+  ims-adminer:
+    image: adminer:4
+    container_name: ims-adminer
+    restart: unless-stopped
+    depends_on:
+      - ims-db
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: ims-db
+
+volumes:
+  ims_postgres_data:
+    driver: local

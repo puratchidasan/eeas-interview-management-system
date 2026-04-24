@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:imstestdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  h2:
+    console:
+      enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  # Disable data initializer CommandLineRunner in tests
+  autoconfigure:
+    exclude:
+
+server:
+  port: 8080
+
+logging:
+  level:
+    eu.commission.ims: WARN
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
