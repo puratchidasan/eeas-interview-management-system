@@ -32,8 +32,8 @@ pipeline {
         JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
 
         // Credentials stored in Jenkins credential store
-        SONAR_TOKEN     = credentials('sonarcloud-token')
-        DOCKER_CREDS    = credentials('docker-registry-creds')
+        SONAR_TOKEN     = credentials('jenkins-ims-token')
+        //DOCKER_CREDS    = credentials('docker-registry-creds')
     }
 
     tools {
