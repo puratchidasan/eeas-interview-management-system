@@ -27,7 +27,7 @@ pipeline {
         APP_NAME        = 'interview-management-system'
         APP_VERSION     = '1.0.0-SNAPSHOT'
         DOCKER_IMAGE    = "ec-ims/${APP_NAME}:${BUILD_NUMBER}"
-        APP_PORT        = '8080'
+        APP_PORT        = '8000'
         APP_URL         = "http://localhost:${APP_PORT}"
         JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
 
@@ -37,8 +37,8 @@ pipeline {
     }
 
     tools {
-        maven 'Maven-3.9'
-        jdk   'JDK-21'
+        maven 'MAVEN'
+        jdk   'JDK_19'
     }
 
     options {

@@ -329,17 +329,17 @@ ec-interview-management-system/
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/ec-interview-management-system.git
+git clone https://github.com/puratchidasan/ec-interview-management-system.git
 cd ec-interview-management-system
 
 # Run the application
 mvn spring-boot:run
 
 # Application starts at:
-#   API:        http://localhost:8080/api/v1/
-#   Swagger UI: http://localhost:8080/swagger-ui.html
-#   H2 Console: http://localhost:8080/h2-console
-#   Health:     http://localhost:8080/actuator/health
+#   API:        http://localhost:8090/api/v1/
+#   Swagger UI: http://localhost:8090/swagger-ui.html
+#   H2 Console: http://localhost:8090/h2-console
+#   Health:     http://localhost:8090/actuator/health
 ```
 
 ### Default Credentials
@@ -392,8 +392,8 @@ Total:      52, Failures: 0, Errors: 0 ✅
 docker compose up -d
 
 # Services:
-#   App:     http://localhost:8080/swagger-ui.html
-#   Adminer: http://localhost:8081  (Server: ims-db, User: ims_user, Pass: ims_pass)
+#   App:     http://localhost:8090/swagger-ui.html
+#   Adminer: http://localhost:8090  (Server: ims-db, User: ims_user, Pass: ims_pass)
 
 # View logs
 docker compose logs -f ims-app
@@ -412,7 +412,7 @@ mvn package -DskipTests
 docker build -t ec-ims:latest .
 
 # Run container
-docker run -d -p 8080:8080 \
+docker run -d -p 8090:8090 \
   -e SPRING_PROFILES_ACTIVE=dev \
   ec-ims:latest
 ```
@@ -459,7 +459,7 @@ Manage Jenkins → Global Tool Configuration:
 New Item → Pipeline
   Definition: Pipeline script from SCM
   SCM: Git
-  Repository URL: https://github.com/YOUR_USERNAME/ec-interview-management-system
+  Repository URL: https://github.com/puratchidasan/ec-interview-management-system
   Script Path: Jenkinsfile
 ```
 
