@@ -1,4 +1,4 @@
-# 🇪🇺 EC Interview Management System
+# 🇪🇺 EEAS Interview Management System
 ### European External Action Service — DevSecOps Showcase
 
 <p align="center">
