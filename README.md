@@ -271,7 +271,7 @@ flowchart TD
 ## 📁 Project Structure
 
 ```
-ec-interview-management-system/
+eeas-interview-management-system/
 │
 ├── 📄 pom.xml                         # Maven — all deps & plugin config
 ├── 🐳 Dockerfile                      # Multi-stage build (JRE 19 runtime)
@@ -329,8 +329,8 @@ ec-interview-management-system/
 
 ```bash
 # Clone the repository
-git clone https://github.com/puratchidasan/ec-interview-management-system.git
-cd ec-interview-management-system
+git clone https://github.com/puratchidasan/eeas-interview-management-system.git
+cd eeas-interview-management-system
 
 # Run the application
 mvn spring-boot:run
@@ -409,12 +409,12 @@ docker compose down
 mvn package -DskipTests
 
 # Build Docker image
-docker build -t ec-ims:latest .
+docker build -t eeas-ims:latest .
 
 # Run container
 docker run -d -p 8090:8090 \
   -e SPRING_PROFILES_ACTIVE=dev \
-  ec-ims:latest
+  eeas-ims:latest
 ```
 
 ---
@@ -459,7 +459,7 @@ Manage Jenkins → Global Tool Configuration:
 New Item → Pipeline
   Definition: Pipeline script from SCM
   SCM: Git
-  Repository URL: https://github.com/puratchidasan/ec-interview-management-system
+  Repository URL: https://github.com/puratchidasan/eeas-interview-management-system
   Script Path: Jenkinsfile
 ```
 
